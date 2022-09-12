@@ -1,9 +1,10 @@
 import React from 'react'
-import {useSelector } from "react-redux"
+import {useSelector, useDispatch } from "react-redux"
 import { CartItem } from '../CartItem/CartItem'
 
 export const CartContainer = () => {
     const {amount, cartItems, total } = useSelector( (store) =>store.cart)
+    const dispatch = useDispatch()
 
   return (
     <>
