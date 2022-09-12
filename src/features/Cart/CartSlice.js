@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import cartItems from "../../cartItems"
 
 const initialState = {
-    amount : 0,
+    amount : 10,
     cartItems : cartItems,
     total : 0,
     isLoading : true,
