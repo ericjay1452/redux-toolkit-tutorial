@@ -1,7 +1,21 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import cartItems from "../../cartItems"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const url = `https://course-api.com/react-useReducer-cart-project`
+const url = `https://course-api.com/react-useReducer-cart-project`;
+
+export const getCartItems = createAsyncThunk("cart/items",
+// you can pass accept a param in this callback function from your useSelector
+async (name,thunkAPI)=>{
+    try {
+        console.log(thunkAPI.getState())
+        console.log(name)
+        const resp = await axios(url)
+        return resp.data;
+    } catch (error) {
+        
+    }
+   
+});
 
 const initialState = {
     amount : 10,
@@ -9,9 +23,6 @@ const initialState = {
     total : 0,
     isLoading : true,
 }
-
-
-
 
 const CartSlice = createSlice( {
     name : "cart",
@@ -42,6 +53,21 @@ const CartSlice = createSlice( {
             state.amount = amount
             state.total = total
         }
+    },
+    extraReducers : {
+        [getCartItems.pending] : (state) =>{
+            state.isLoading = true;
+        },
+
+        [getCartItems.fulfilled] : (state, {payload}) =>{
+          state.isLoading = false;
+          state.cartItems = payload;
+          console.log(payload);
+        },
+
+        [getCartItems.rejected] : (state) =>{
+            state.isLoading = false
+        } 
     }
 })
 
