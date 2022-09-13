@@ -18,6 +18,7 @@ export const CartContainer = () => {
         </section>
     )}
 
+{amount && (
     <section>
         <header>
             <h2>Your bag</h2>
@@ -36,6 +37,7 @@ export const CartContainer = () => {
             <button className='btn clear-btn' onClick={()=>dispatch(clearCart())}>Clear Cart</button>
         </footer>
     </section>
+    )}
     </>
   )
 }
